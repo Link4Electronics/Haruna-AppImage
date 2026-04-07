@@ -23,11 +23,13 @@ get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 #make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
+if [ "${ARCH}" = x86_64 ]; then
+pacman -S --noconfirm bun
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+# yt-dlp-ejs archlinux package has a hard dependency on deno
+# but this can actually use bun instead
+pacman -Rdd --noconfirm deno
+
+# yt-dlp also gives a warning that only deno is supported by default
+sed -i -e "s|default=\['deno'\]|default=['bun']|" /usr/lib/python*/site-packages/yt_dlp/options.py
+fi
