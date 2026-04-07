@@ -17,7 +17,11 @@ export DEPLOY_PIPEWIRE=1
 export DEPLOY_SYS_PYTHON=1
 
 # Deploy dependencies
-quick-sharun /usr/bin/haruna
+if [ "${ARCH}" = x86_64 ]; then
+  quick-sharun /usr/bin/haruna /usr/bin/deno
+else
+  quick-sharun /usr/bin/haruna
+fi
 
 # Additional changes can be done in between here
 
