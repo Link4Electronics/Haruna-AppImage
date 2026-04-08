@@ -18,9 +18,9 @@ export DEPLOY_SYS_PYTHON=1
 
 # Deploy dependencies
 if [ "${ARCH}" = x86_64 ]; then
-  quick-sharun /usr/bin/haruna /usr/bin/bun
+  quick-sharun /usr/bin/haruna /usr/bin/bun /usr/bin/yt-dlp
 else
-  quick-sharun /usr/bin/haruna
+  quick-sharun /usr/bin/haruna /usr/bin/yt-dlp
 fi
 
 # Additional changes can be done in between here
